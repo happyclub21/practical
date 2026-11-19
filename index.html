@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
 <title>Practical Files Library</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -23,7 +25,7 @@ body {
 
 h1 {
     color: #00e5ff;
-    font-size: 30px;
+    font-size: 32px;
 }
 
 .subtitle {
@@ -32,7 +34,7 @@ h1 {
 }
 
 .container {
-    max-width: 650px;
+    max-width: 700px;
     margin: auto;
 }
 
@@ -49,38 +51,42 @@ h1 {
     color: #243b55;
 }
 
-input {
-    margin: 20px 0;
-    max-width: 100%;
+.file-icon {
+    font-size: 50px;
+    margin: 10px;
+}
+
+.file-name {
+    color: #555;
+    font-size: 14px;
+    overflow-wrap: anywhere;
 }
 
 button {
     background: #007bff;
     color: white;
     border: none;
-    padding: 12px 25px;
+    padding: 13px 25px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 15px;
-    margin: 8px;
+    font-size: 16px;
+    margin: 12px;
 }
 
 button:hover {
     background: #0056b3;
 }
 
-iframe {
-    width: 100%;
-    height: 400px;
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+a {
+    text-decoration: none;
 }
 
-.status {
-    color: #16803c;
-    font-weight: bold;
-    margin-top: 15px;
+iframe {
+    width: 100%;
+    height: 450px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
 }
 
 .footer {
@@ -88,7 +94,9 @@ iframe {
     color: #ccc;
     font-size: 14px;
 }
+
 </style>
+
 </head>
 
 <body>
@@ -96,7 +104,7 @@ iframe {
 <h1>📚 Practical Files Library</h1>
 
 <p class="subtitle">
-Access and download your semester practical files
+Download your semester practical files easily
 </p>
 
 <div class="container">
@@ -105,29 +113,29 @@ Access and download your semester practical files
 
     <div class="file-box">
 
-        <h2>📕 Semester 5 Practicals</h2>
+        <div class="file-icon">📕</div>
 
-        <p>Upload Sem 5 practicals PDF</p>
+        <h2>Semester 5 Practicals</h2>
 
-        <input
-            type="file"
-            id="pdf5"
-            accept=".pdf"
-        >
+        <p class="file-name">
+            Sem 5 practicals.nb.pdf
+        </p>
 
-        <br>
+        <a href="./Sem%205%20practicals.nb.pdf"
+           target="_blank">
 
-        <button onclick="uploadPDF()">
-            Upload PDF
-        </button>
+            <button>
+                View PDF
+            </button>
 
-        <div id="preview5"></div>
+        </a>
 
-        <a id="download5"
-           style="display:none"
+        <a href="./Sem%205%20practicals.nb.pdf"
            download="Sem 5 practicals.nb.pdf">
 
-            <button>Download PDF</button>
+            <button>
+                Download PDF
+            </button>
 
         </a>
 
@@ -138,111 +146,34 @@ Access and download your semester practical files
 
     <div class="file-box">
 
-        <h2>📦 Semester 3 Practicals</h2>
+        <div class="file-icon">📦</div>
 
-        <p>Upload sem3 ZIP file</p>
+        <h2>Semester 3 Practicals</h2>
 
-        <input
-            type="file"
-            id="zip3"
-            accept=".zip"
-        >
+        <p class="file-name">
+            sem3.zip
+        </p>
 
-        <br>
-
-        <button onclick="uploadZIP()">
-            Upload ZIP
-        </button>
-
-        <br>
-
-        <a id="download3"
-           style="display:none"
+        <a href="./sem3.zip"
            download="sem3.zip">
 
-            <button>Download ZIP</button>
+            <button>
+                Download ZIP
+            </button>
 
         </a>
-
-        <div id="zipStatus" class="status"></div>
 
     </div>
 
 </div>
 
 <div class="footer">
+
     <p>© 2026 Practical Files Library</p>
     <p>Made for Students ❤️</p>
+
 </div>
-
-
-<script>
-
-// SEMESTER 5 PDF UPLOAD
-
-let pdfURL = null;
-let zipURL = null;
-
-function uploadPDF() {
-
-    const file = document.getElementById("pdf5").files[0];
-
-    if (!file) {
-        alert("Please select a PDF file!");
-        return;
-    }
-
-    if (!file.name.toLowerCase().endsWith(".pdf")) {
-        alert("Please upload a valid PDF file!");
-        return;
-    }
-
-    if (pdfURL) URL.revokeObjectURL(pdfURL);
-
-    pdfURL = URL.createObjectURL(file);
-
-    document.getElementById("preview5").innerHTML =
-        `<iframe title="PDF Preview" src="${pdfURL}"></iframe>`;
-
-    const download = document.getElementById("download5");
-
-    download.href = pdfURL;
-    download.style.display = "inline-block";
-
-}
-
-
-// SEMESTER 3 ZIP UPLOAD
-
-function uploadZIP() {
-
-    const file = document.getElementById("zip3").files[0];
-
-    if (!file) {
-        alert("Please select sem3.zip!");
-        return;
-    }
-
-    if (!file.name.toLowerCase().endsWith(".zip")) {
-        alert("Please upload a valid ZIP file!");
-        return;
-    }
-
-    if (zipURL) URL.revokeObjectURL(zipURL);
-
-    zipURL = URL.createObjectURL(file);
-
-    const download = document.getElementById("download3");
-
-    download.href = zipURL;
-    download.style.display = "inline-block";
-
-    document.getElementById("zipStatus").innerText =
-        "✓ ZIP file uploaded successfully!";
-
-}
-
-</script>
 
 </body>
 </html>
+
